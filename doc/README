@@ -1,7 +1,7 @@
 ctm
 ==
 
-This is Turing Machine simulator written in vanilla C
+This is Turing Machine simulator.
 
 
 Introduction
@@ -9,13 +9,63 @@ Introduction
 
 From Wikipedia:
 
+    A Turing machine is a hypothetical device that manipulates symbols on a
+    strip of tape according to a table of rules. Despite its simplicity, a
+    Turing machine can be adapted to simulate the logic of any computer
+    algorithm, and is particularly useful in explaining the functions of a CPU
+    inside a computer.
+
+    The "Turing" machine was invented in 1936 by Alan Turing who called it an
+    "a-machine" (automatic machine). The Turing machine is not intended as
+    practical computing technology, but rather as a hypothetical device
+    representing a computing machine. Turing machines help computer scientists
+    understand the limits of mechanical computation.
+
 
 How to compile/build the simulator
 ==================================
 
+In order to compile the simulator, simply run the command:
+
+    make
+
+from the project root directory - the one which contains the file "Makefile".
+Object files will be put in the "obj" directory (one will be created if it does
+not already exist) and the file structure of the directory will mirror that of
+the "src" directory. An exectuable, TMSim, will be created in the "bin"
+directory (again, the directory will be created if it does not already exist).
+
+If you make any changes to the source code for the simulator, you'll have to run
+the command:
+
+    make
+
+again to rebuild the project. Note that if you make any edits to any of the ".h"
+files, you'll have to run the:
+
+    make clean
+
+command to delete all object files and thus force the compiler to re-compile
+all of the files, regardless of whether or not it thinks they need to be.
+
+Remember, all of the above commands must be run from the project root directory,
+since the make utility needs to be run in the same directory as the Makefile.
+
+Also, as one last note, there is no need to change or modify the Makefile. As
+long as all code is place in the "src" directory, it will be automatically
+discovered and built.
+
 
 How to run the simulator
 ========================
+
+To run the simulator, simply run the executable file in the "bin" folder, as in:
+
+    <path-to-project-root>/bin/TMSim
+
+If you're already in the project root directory, you can simply run:
+
+    ./bin/TMSim
 
 
 Key features
@@ -23,30 +73,65 @@ Key features
 
 Vanilla C
 ---------
+The simulator was written in plain 'ole C. Hopefully this means it's portable
+and easy to use - no extra add-ons or libraries required!
 
 Complete specification
 ----------------------
-
-Wildcard matching
-----------------
-
-No-Rule rejection
-----------------
-
-Valgrind approved
------------------
-
-Copy semantics
---------------
+The simulator was written in such a way as to require complete specification
+of each Turing Machine. This reduces ambiguity and allows us to remain as
+theoretically pure as possible.
 
 Purposeful Ignorance
 --------------------
+The only mechanism for creating and executing a Turing Machine is to specify its
+formal parameters. This means that Turing Machine writers cannot fall into the
+trap of accidentally providing functionality (using variables, etc.) that a
+Turing Machine doesn't inherently have.
+
+No-Rule rejection
+----------------
+If a machine encounters a state and input symbol for which it has no explicit
+rule, it simply rejects the input. This allows Turing Machine writers to only
+concern themselves with acceptance criteria, as opposed to having to completely
+specify every case in which input is rejected.
+
+Wildcard matching
+----------------
+The WILDCARD_SYMBOL allows us to match against any particular input character.
+This makes fully specifying each Turing Machine less cumbersome. Since the
+implementation guarantees that transition function rules are checked in the
+same order that they were added to the Transition Function object, one can
+simply write rules for special input characters, and then use the
+WILDCARD_SYMBOL to match all other input characters. Additionally, if the
+WILDCARD_SYMBOL is specified as the output character for a particular rule,
+the input character is used as the output character. This allows us to traverse
+a tape while wildcard matching and leaving the tape unmodified. See the
+"GoToEnd" machine for an example of this technique.
+
+Valgrind approved
+-----------------
+The simulator was rigorously tested and verified with valgrind.
 
 
 Creating your own machine
 =========================
 
-See the example machines
+To create your own Turing Machine, simply do the following:
+
+    1.) Write a "createMachine" function for the machine. Put that function in
+        its own ".c" file in the "machines" directory.
+
+    2.) Put a declaration of your "createMachine" function in the
+        "CreateMachines.h" file.
+
+    3.) Create, run, and cleanup the machine in the "Main.c" file
+
+When writing your own machine, it's a really good idea to copy over an existing
+"createMachine" file and then modify its contents as opposed to writing one from
+scratch. It is amazingly easy to forget about explicitly specifying certain
+things or performing proper cleanup.
+
 
 Contact
 =======
