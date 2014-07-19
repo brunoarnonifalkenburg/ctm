@@ -52,22 +52,20 @@ Machine* createMachine_palindrome() {
     TransitionFunction_addRule(function,       "C", WILDCARD_SYMBOL,      "C", WILDCARD_SYMBOL, RIGHT);
 
     // If the character prior to the end is uppercase, we've checked every character
-    TransitionFunction_addRule(function,    "EndA",             'X', "Accept",          'X', RIGHT);
-    TransitionFunction_addRule(function,    "EndB",             'X', "Accept",          'X', RIGHT);
-    TransitionFunction_addRule(function,    "EndC",             'X', "Accept",          'X', RIGHT);
+    TransitionFunction_addRule(function,    "EndA",             'X', "Accept",             'X', RIGHT);
+    TransitionFunction_addRule(function,    "EndB",             'X', "Accept",             'X', RIGHT);
+    TransitionFunction_addRule(function,    "EndC",             'X', "Accept",             'X', RIGHT);
 
     // If the character prior to the end is lowercase, we still have characters to check
-    TransitionFunction_addRule(function,    "EndA",             'a',   "Next",          'X', LEFT);
-    TransitionFunction_addRule(function,    "EndB",             'b',   "Next",          'X', LEFT);
-    TransitionFunction_addRule(function,    "EndC",             'c',   "Next",          'X', LEFT);
-
-    // Proceed to the beginning again so that we can check the next character
-    TransitionFunction_addRule(function,    "Next",             'a',   "Next",          'a', LEFT);
-    TransitionFunction_addRule(function,    "Next",             'b',   "Next",          'b', LEFT);
-    TransitionFunction_addRule(function,    "Next",             'c',   "Next",          'c', LEFT);
+    TransitionFunction_addRule(function,    "EndA",             'a',   "Next",             'X', LEFT);
+    TransitionFunction_addRule(function,    "EndB",             'b',   "Next",             'X', LEFT);
+    TransitionFunction_addRule(function,    "EndC",             'c',   "Next",             'X', LEFT);
 
     // Once we've found the beginning, check a new character
-    TransitionFunction_addRule(function,    "Next",             'X',    "New",          'X', RIGHT);
+    TransitionFunction_addRule(function,    "Next",             'X',    "New",             'X', RIGHT);
+
+    // If we haven't reach the beginning, keep going
+    TransitionFunction_addRule(function,    "Next", WILDCARD_SYMBOL,   "Next", WILDCARD_SYMBOL, LEFT);
 
     Machine* machine = Machine_new("Palindrome", states, input_alphabet, tape_alphabet,
                                    initial_state, accepting_states, function);
