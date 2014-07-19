@@ -1,0 +1,53 @@
+ctm
+==
+
+This is Turing Machine simulator written in vanilla C
+
+
+Introduction
+============
+
+From Wikipedia:
+
+
+How to compile/build the simulator
+==================================
+
+
+How to run the simulator
+========================
+
+
+Key features
+============
+
+Vanilla C
+---------
+
+Complete specification
+----------------------
+
+Wildcard matching
+----------------
+
+No-Rule rejection
+----------------
+
+Valgrind approved
+-----------------
+
+Copy semantics
+--------------
+
+Purposeful Ignorance
+--------------------
+
+
+Creating your own machine
+=========================
+
+See the example machines
+
+Contact
+=======
+Any questions can be directed to mward4@buffalo.edu

@@ -1,0 +1,8 @@
+#ifndef TM_BLANKSYMBOL
+#define TM_BLANKSYMBOL
+
+#define BLANK_SYMBOL ' '
+#define TAPEHEAD_SYMBOL '['
+#define WILDCARD_SYMBOL '*'
+
+#endif // TM_BLANKSYMBOL
