@@ -7,6 +7,7 @@
 #include "CharVector.h"
 #include "Symbols.h"
 
+
 struct Machine {
     char*               name;
     StringVector*       states;
@@ -83,8 +84,6 @@ void Machine_validate(Machine* this) {
 }
 
 void Machine_print(Machine* this, int ms_delay) {
-
-    // Could use something like NCURSES here to make it look better
 
     int i;
     bool twoLine = false;

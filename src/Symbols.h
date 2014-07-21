@@ -1,8 +1,13 @@
 #ifndef TM_BLANKSYMBOL
 #define TM_BLANKSYMBOL
 
+#undef BLANK_SYMBOL
 #define BLANK_SYMBOL ' '
+
+#undef TAPEHEAD_SYMBOL
 #define TAPEHEAD_SYMBOL '['
+
+#undef WILDCARD_SYMBOL
 #define WILDCARD_SYMBOL '*'
 
 #endif // TM_BLANKSYMBOL
