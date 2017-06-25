@@ -77,33 +77,26 @@ void StringVector_append(StringVector* this, char* str) {
 
 bool StringVector_uniqueElements(StringVector* this) {
     int i, j;
-    bool unique = true;
     int len = StringVector_size(this);
     for (i = 0; i < len; ++i) {
         for (j = i + 1; j < len; ++j) {
             if (strcmp(StringVector_at(this, i), StringVector_at(this, j)) == 0) {
-                unique = false;
-                break;
+                return false;
             }
         }
-        if (!unique) {
-            break;
-        }
     }
-    return unique;
+    return true;
 }
 
 bool StringVector_isSubset(StringVector* this, StringVector* other) {
     int i;
-    bool subset = true;
     int len = StringVector_size(this);
     for (i = 0; i < len; ++i) {
         if (!StringVector_in(other, StringVector_at(this, i))) {
-            subset = false;
-            break;
+            return false;
         }
     }
-    return subset;
+    return true;
 }
 
 void StringVector_print(StringVector* this) {

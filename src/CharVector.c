@@ -80,20 +80,15 @@ void CharVector_explodeAppend(CharVector* this, char* chars) {
 
 bool CharVector_uniqueElements(CharVector* this) {
     int i, j;
-    bool unique = true;
     int len = CharVector_size(this);
     for (i = 0; i < len; ++i) {
         for (j = i + 1; j < len; ++j) {
             if (CharVector_at(this, i) == CharVector_at(this, j)) {
-                unique = false;
-                break;
+                return false;
             }
         }
-        if (!unique) {
-            break;
-        }
     }
-    return unique;    
+    return true;    
 }
 
 bool CharVector_isSubset(CharVector* this, CharVector* other) {

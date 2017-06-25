@@ -1,8 +1,8 @@
 # Program name
-PROGRAM = TMSim
+PROGRAM = a.out
 
 # Flags
-FLAGS = -g -Wall -Werror
+FLAGS = -MMD -g -Wall -Werror
 
 # Directories
 SRC = ./src/
@@ -10,20 +10,20 @@ OBJ = ./obj/
 BIN = ./bin/
 
 # Source files
-PRELIMSOURCES=$(shell find $(SRC) -name '*.c')
-SOURCES=$(PRELIMSOURCES:$(SRC)%=%)
+PRELIMSOURCES = $(shell find $(SRC) -name '*.c')
+SOURCES = $(PRELIMSOURCES:$(SRC)%=%)
 
 # Object files that mirror the source files
-OBJECTS=$(SOURCES:.c=.o)
+OBJECTS = $(SOURCES:.c=.o)
 
 # Prefixed Source files
-PREFIXED_SOURCES=$(addprefix $(SRC),$(SOURCES))
+PREFIXED_SOURCES = $(addprefix $(SRC),$(SOURCES))
 
 # Prefixed Object files
-PREFIXED_OBJECTS=$(addprefix $(OBJ),$(OBJECTS))
+PREFIXED_OBJECTS = $(addprefix $(OBJ),$(OBJECTS))
 
 # Prefixed Program name
-PREFIXED_PROGRAM=$(addprefix $(BIN),$(PROGRAM))
+PREFIXED_PROGRAM = $(addprefix $(BIN),$(PROGRAM))
 
 # Make 'all' instructions - default target
 all: $(PREFIXED_SOURCES) $(PREFIXED_PROGRAM)
@@ -43,4 +43,8 @@ $(OBJ)%.o: $(SRC)%.c
 # 'sort' sorts the directories and removes duplicates
 # 'add' is pretty self-explanatory 
 clean:
-	rm -f $(addprefix $(OBJ), $(addsuffix *.o, $(sort $(dir $(OBJECTS)))))
+	rm -rf $(OBJ)
+	rm -rf $(BIN)
+
+# Include all of our dependency files, if they exist
+-include $(addprefix $(OBJ),$(SOURCES:.c=.d))

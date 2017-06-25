@@ -11,7 +11,7 @@ void run(Machine* machine, char* input) {
 
 void runAndPrint(Machine* machine, char* input) {
     printf("Executing \"%s\" on input \"%s\"\n", Machine_getName(machine), input);
-    bool accepted = Machine_run(machine, input, true, 100);
+    bool accepted = Machine_run(machine, input, true, 150);
     printf( accepted ? "\nAccepted\n\n" : "\nRejected\n\n" );
 }
 
