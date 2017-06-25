@@ -3,7 +3,7 @@ ctm
 
 A Turing machine simulator
 
-![](https://github.com/mackorone/ctm/demo.gif)
+![](https://github.com/mackorone/ctm/blob/master/demo.gif)
 
 
 Introduction
